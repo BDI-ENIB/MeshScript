@@ -26,6 +26,16 @@ class MeshScript{
       delete this.nodes[i];
     }
   }
+  pause(){
+    for(var i in this.links){
+      this.links[i].pause();
+    }
+  }
+  unpause(){
+    for(var i in this.links){
+      this.links[i].unpause();
+    }
+  }
 }
 function isSet(i){
   return typeof i !== "undefined";
