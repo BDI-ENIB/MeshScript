@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <script src="../src/Node.js"></script>
+    <script src="../src/Link.js"></script>
+    <script src="../src/MeshScript.js"></script>
+  </head>
+  <body>
+    <script>
+      var n={node:Node};
+      var d={
+        nodes:[
+          {
+            id:"one",
+            type:"node",
+            outputs:["a","b","c"],
+            code:function(params,output){console.log("1");setInterval(function(){output("a",params);},1000);}
+          },
+          {
+            id:"two",
+            type:"node",
+            outputs:[],
+            code:function(params,output){console.log("2");}
+          },
+        ],
+        links:[
+          {
+            id:"one-two",
+            start:"one",
+            end:"two",
+            output:"a"
+          }
+        ]
+      };
+      var mesh =new MeshScript(d,n);
+      mesh.nodes["one"].trigger({});
+      setTimeout(function(){mesh.destroy();},10000);
+    </script>
+  </body>
+</html>
