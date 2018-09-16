@@ -1,4 +1,4 @@
-import {Link} from "./Link.js";
+import {Link} from "./Link.mjs";
 export class MeshScript{
   constructor(descriptor,nodeList){
     descriptor=isSet(descriptor)?descriptor:{};

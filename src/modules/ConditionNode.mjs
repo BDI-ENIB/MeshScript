@@ -1,4 +1,4 @@
-import {Node} from "../core/Node.js";
+import {Node} from "../core/Node.mjs";
 export class ConditionNode extends Node{
   constructor(options){
     super(options);

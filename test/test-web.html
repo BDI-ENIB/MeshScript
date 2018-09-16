@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <script src="../src/BrowserAdapter/EventEmitter.min.js"></script>
+  </head>
+  <body>
+  <canvas id="c" width="1920" height="1080" style="width:100%;"></canvas>
+    <script type="module">
+      import {MeshScript} from "../src/core/MeshScript.mjs";
+      import {Node} from "../src/core/Node.mjs";
+      import {ClockNode} from "../src/modules/ClockNode.mjs";
+      import {DephaserNode} from "../src/modules/DephaserNode.mjs";
+      import {SyncerNode} from "../src/modules/SyncerNode.mjs";
+      var n={node:Node,clock:ClockNode,dephaser:DephaserNode,syncer:SyncerNode};
+      fetch("./test-descriptor.json").then(d=>d.json()).then(d=>{
+        if(!"nodes" in d || !"links" in d) throw "invalid data structure";
+        for(let n of d.nodes){
+          if(typeof n.code == "string") n.code = eval(n.code);
+        }
+        return d;
+      }).then(d=>{
+        var mesh =new MeshScript(d,n);
+        setTimeout(function(){mesh.destroy();},10000);
+        
+        //debug display
+        let c = document.getElementById("c");
+        let ctx = c.getContext("2d");
+        
+        for(let i=0;i<d.nodes.length;i++){
+          d.nodes[i].debugDisplay = {
+            x: Math.cos(i/d.nodes.length*2*Math.PI)*500 +1920 /2,
+            y: Math.sin(i/d.nodes.length*2*Math.PI)*500 +1080 /2
+          };
+          
+        }
+        for(let l of d.links){
+          let start = d.nodes.filter(n=>n.id==l.start)[0];
+          let end = d.nodes.filter(n=>n.id==l.end)[0];
+          ctx.beginPath();
+          ctx.moveTo(start.debugDisplay.x,start.debugDisplay.y);
+          ctx.lineTo(end.debugDisplay.x,end.debugDisplay.y);
+          ctx.stroke();
+          ctx.beginPath();
+          
+          
+        }
+        for(let n of d.nodes){
+          ctx.fillStyle = "white";
+          ctx.beginPath();
+          ctx.arc(n.debugDisplay.x,n.debugDisplay.y,100,0,2*Math.PI);
+          ctx.stroke();
+          ctx.fill();
+          ctx.fillStyle = "black";
+          ctx.font="30px Arial";
+          ctx.fillText(n.id,n.debugDisplay.x-70,n.debugDisplay.y+25);
+          ctx.fillText(n.type,n.debugDisplay.x-70,n.debugDisplay.y-25);
+        }
+      });
+    </script>
+  </body>
+</html>
