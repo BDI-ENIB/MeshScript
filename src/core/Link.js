@@ -16,7 +16,7 @@ class Link{
       sp=params;
     }
   }
-  breack(){
+  disconnect(){
     this.i.disconnect(this.d);
     delete this.i;
     delete this.o;
