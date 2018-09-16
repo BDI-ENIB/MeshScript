@@ -1,4 +1,5 @@
-class ClockNode extends Node{
+import {Node} from "../core/Node.js";
+export class ClockNode extends Node{
   constructor(options){
     super(options);
     this.outputs["output"]=[];

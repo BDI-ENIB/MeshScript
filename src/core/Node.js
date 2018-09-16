@@ -1,4 +1,4 @@
-class Node{
+export class Node{
   constructor(options){
     this.options=typeof options !== "undefined"?options:{};
     this.outputs = {};

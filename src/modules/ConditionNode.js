@@ -1,4 +1,5 @@
-class ConditionNode extends Node{
+import {Node} from "../core/Node.js";
+export class ConditionNode extends Node{
   constructor(options){
     super(options);
     this.outputs["true"]=[];

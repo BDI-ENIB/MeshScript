@@ -1,4 +1,5 @@
-class SyncerNode extends Node{
+import {Node} from "../core/Node.js";
+export class SyncerNode extends Node{
   constructor(options){
     super(options);
     this.outputs["output"]=[];

@@ -1,4 +1,4 @@
-class Link{
+export class Link{
   constructor(i,n,o){
     this.id=Math.round(Math.random()*1000000);//unique identifier
     this.i=i;//start node

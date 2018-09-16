@@ -1,4 +1,5 @@
-class DephaserNode extends Node{
+import {Node} from "../core/Node.js";
+export class DephaserNode extends Node{
   constructor(options){
     super(options);
     this.outputs["output"]=[];
