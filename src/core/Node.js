@@ -11,7 +11,7 @@ class Node{
   }
   connect(output,link){
     if(output in this.outputs){
-      var id=Math.round(Math.random()*1000000);
+      var id=Math.round(Math.random()*1000000); //create connection token
       this.outputs[output].push({id:id,link:link});
       return id;
     }else return false;
@@ -30,7 +30,7 @@ class Node{
   trigger(params){
     var outputs=this.outputs;
     this.options.code(params,
-      function(output,params){
+      function(output,params){//output trigger function
         if(output in outputs){
           for(var i=0;i<outputs[output].length;i++){
             outputs[output][i].link.trigger(params);
